@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🍕 Pizza Price Predictor</h1>
+        <form method="POST" onsubmit="return validateInput()">
+            <label for="size">Enter Pizza Size (inches):</label>
+            <input type="number" step="0.1" name="size" id="size" required>
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction is not none %}
+            <h2>For a <span class="highlight">{{ size }} inch</span> pizza, estimated price is <span class="highlight">৳{{ prediction }}</span></h2>
+        {% endif %}
+
+        <p class="footer">Powered by ML | Designed by Badhan Roy</p>
+    </div>
+
+    <script>
+        function validateInput() {
+            const size = document.getElementById('size').value;
+            if (size <= 0) {
+                alert("Please enter a valid positive pizza size.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
